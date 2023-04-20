@@ -9,8 +9,11 @@ const index = () => {
         Welcome to
         <Text style={styles.innerText}> Smart-City</Text>
       </Text>
-      <Link style={styles.btn} href="/MapPage">
+      <Link style={styles.btn} href="/map">
         Goto Map
+      </Link>
+      <Link style={styles.btn} href="/login">
+        Login
       </Link>
     </View>
   );

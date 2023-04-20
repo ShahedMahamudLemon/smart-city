@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import MapView, { Marker } from "react-native-maps";
 import { StyleSheet, View } from "react-native";
-const MapPage = () => {
+const map = () => {
   const [mapRegion, setMapRegio] = useState({
     latitude: 23.811056,
     longitude: 90.407608,
@@ -28,4 +28,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MapPage;
+export default map;
