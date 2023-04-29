@@ -9,11 +9,20 @@ import {
   View,
 } from "react-native";
 import CustomBox from "react-native-customized-box";
-
+import { useNavigation } from "@react-navigation/native";
 const registration = () => {
+  const navigation = useNavigation();
   return (
     <View style={{ marginTop: 35 }}>
       <StatusBar barStyle="dark-content" />
+      <TouchableOpacity
+        onPress={() => {
+          navigation.goBack();
+        }}
+        style={styles.backBtn}
+      >
+        <Text style={styles.backBtnTxt}>←</Text>
+      </TouchableOpacity>
       <ScrollView style={{ paddingTop: 20 }}>
         <View style={styles.container}>
           <Text style={styles.header}>Create Account for Free!</Text>
@@ -165,6 +174,21 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: "500",
     position: "absolute",
+  },
+  backBtn: {
+    width: 50,
+    height: 50,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 5,
+    borderRadius: 50,
+    backgroundColor: "#b7c4ed",
+    // marginRight: 200,
+    marginTop: 10,
+  },
+  backBtnTxt: {
+    fontSize: 30,
+    color: "black",
   },
   cross: {
     width: 20,

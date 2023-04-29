@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
 import {
-  ActivityIndicator,
   Image,
   StatusBar,
   StyleSheet,
@@ -10,13 +9,62 @@ import {
 } from "react-native";
 import CustomBox from "react-native-customized-box";
 import { Link } from "expo-router";
+import axios from "axios";
+import { useNavigation } from "@react-navigation/native";
 
 const login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState(0);
+  const [errorMsg, setErrorMsg] = useState("");
+  const navigation = useNavigation();
+  const loginFunction = async () => {
+    const loginCredentials = {
+      email: email,
+      password: password,
+    };
+    if (email !== "" && password !== "") {
+      try {
+        await axios({
+          method: "POST",
+          url: "https://backend-smart-city.onrender.com/api/smart-city/v1/user/login",
+          data: loginCredentials,
+        }).then((response) => {
+          if (response.data.status && response.data.status === "success") {
+            setError(0);
+            setErrorMsg("");
+            alert(response.data.message);
+            navigation.navigate("listitem");
+          }
+        });
+      } catch (error) {
+        if (
+          error.response &&
+          error.response.status >= 400 &&
+          error.response.status <= 500
+        ) {
+          setError(1);
+          setErrorMsg(error.response.data.errors[0].message);
+        }
+      }
+    } else {
+      setError(1);
+      setErrorMsg("Email and Password is required to login..");
+    }
+  };
   return (
     //
 
     <View style={styles.container}>
       <StatusBar />
+      <TouchableOpacity
+        onPress={() => {
+          navigation.goBack();
+        }}
+        style={styles.backBtn}
+      >
+        <Text style={styles.backBtnTxt}>←</Text>
+      </TouchableOpacity>
       <Text style={styles.header}>Login to your account</Text>
       <Image
         style={styles.loginImage}
@@ -44,12 +92,10 @@ const login = () => {
             fontWeight: "bold",
           },
         }}
-        // values={getEmailId}
-        // onChangeText={(value) => {
-        //   setEmailId(value);
-        //   setError(false);
-        //   setEmailError("");
-        // }}
+        values={email}
+        onChangeText={(value) => {
+          setEmail(value);
+        }}
       />
       <CustomBox
         placeholder={"Password"}
@@ -70,29 +116,28 @@ const login = () => {
             fontWeight: "bold",
           },
         }}
-        // values={getPassword}
-        // onChangeText={(value) => {
-        //   setPassword(value);
-        //   setError(false);
-        //   setPasswordError("");
-        // }}
+        values={password}
+        onChangeText={(value) => {
+          setPassword(value);
+        }}
       />
       <TouchableOpacity
         style={styles.forgotBtn}
-        onPress={() => {
-          navigation.navigate("ForgotPassword");
-        }}
+        // onPress={() => {
+        //   navigation.navigate("ForgotPassword");
+        // }}
       >
         <Text style={styles.forgotBtnText}>Forgot Password?</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity
-        style={styles.loginBtn}
-        // onPress={loginFunction}
-        // disabled={getDisabled}
-      >
+      <TouchableOpacity style={styles.loginBtn} onPress={loginFunction}>
         <Text style={styles.loginBtnText}>LogIn</Text>
       </TouchableOpacity>
+      {error ? (
+        <View>
+          <Text style={styles.errorMsgTxt}>{errorMsg}</Text>
+        </View>
+      ) : null}
       <View style={styles.createAccount}>
         <Text style={styles.createAccountText}>
           {`Don't have an Account? `}
@@ -121,6 +166,21 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingLeft: 15,
     borderRadius: 40,
+  },
+  backBtn: {
+    width: 50,
+    height: 50,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 5,
+    borderRadius: 50,
+    backgroundColor: "#b7c4ed",
+    marginRight: 300,
+    marginBottom: 50,
+  },
+  backBtnTxt: {
+    fontSize: 30,
+    color: "black",
   },
   errorCardText: {
     paddingLeft: 15,
@@ -156,12 +216,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
   },
+  errorMsgTxt: {
+    color: "red",
+    fontSize: 13,
+    fontWeight: "200",
+  },
   loginBtnText: {
     color: "white",
     fontSize: 22,
   },
   forgotBtn: {
-    marginTop: -20,
     width: 280,
     height: 20,
     justifyContent: "center",

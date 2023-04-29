@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, Image } from "react-native";
 import { Link } from "expo-router";
 
 const index = () => {
@@ -15,6 +15,12 @@ const index = () => {
       <Link style={styles.btn} href="/login">
         Login
       </Link>
+      <Image
+        style={styles.registerImage}
+        source={{
+          uri: "https://raw.githubusercontent.com/hirishu10/my-assets/main/register.png",
+        }}
+      />
     </View>
   );
 };
@@ -40,6 +46,11 @@ const styles = StyleSheet.create({
     color: "white",
     padding: 12,
     fontSize: 20,
+  },
+  registerImage: {
+    marginTop: 50,
+    width: 250,
+    height: 250,
   },
 });
 export default index;
