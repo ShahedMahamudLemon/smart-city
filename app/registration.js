@@ -181,10 +181,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 5,
-    borderRadius: 50,
+    borderRadius: 5,
     backgroundColor: "#b7c4ed",
-    // marginRight: 200,
+    marginLeft: 5,
     marginTop: 10,
+    elevation: 5,
   },
   backBtnTxt: {
     fontSize: 30,

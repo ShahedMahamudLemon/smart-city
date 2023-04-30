@@ -1,10 +1,20 @@
 import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 const listitem = () => {
+  const navigation = useNavigation();
   return (
     <View style={styles.containerMain}>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.goBack();
+        }}
+        style={styles.backBtn}
+      >
+        <Text style={styles.backBtnTxt}>←</Text>
+      </TouchableOpacity>
       <Text style={styles.header}>Important Places</Text>
       {/* 1 */}
       <View style={styles.container}>
@@ -13,12 +23,17 @@ const listitem = () => {
             <Ionicons name="square" size={30} color={"gray"} />
           </View>
           <View style={styles.productInfoContainer}>
-            <Text style={styles.secondaryText}>Super Shopping Mall</Text>
+            <Text style={styles.secondaryText}>Hotels</Text>
             <Text>Rating 5</Text>
           </View>
         </View>
         <View>
-          <TouchableOpacity style={styles.detailsBtn}>
+          <TouchableOpacity
+            style={styles.detailsBtn}
+            onPress={() => {
+              navigation.navigate("itemdetails");
+            }}
+          >
             <Text style={styles.primaryText}>Details</Text>
           </TouchableOpacity>
         </View>
@@ -30,12 +45,17 @@ const listitem = () => {
             <Ionicons name="square" size={30} color={"gray"} />
           </View>
           <View style={styles.productInfoContainer}>
-            <Text style={styles.secondaryText}>Super Shopping Mall</Text>
+            <Text style={styles.secondaryText}>Shopping Mall</Text>
             <Text>Rating 5</Text>
           </View>
         </View>
         <View>
-          <TouchableOpacity style={styles.detailsBtn}>
+          <TouchableOpacity
+            style={styles.detailsBtn}
+            onPress={() => {
+              navigation.navigate("itemdetails");
+            }}
+          >
             <Text style={styles.primaryText}>Details</Text>
           </TouchableOpacity>
         </View>
@@ -48,10 +68,25 @@ export default listitem;
 
 const styles = StyleSheet.create({
   containerMain: {
-    marginTop: 30,
+    marginTop: 40,
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+  },
+  backBtn: {
+    width: 50,
+    height: 50,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 5,
+    borderRadius: 5,
+    backgroundColor: "#b7c4ed",
+    marginRight: 300,
+    elevation: 5,
+  },
+  backBtnTxt: {
+    fontSize: 30,
+    color: "black",
   },
   container: {
     display: "flex",
@@ -77,7 +112,7 @@ const styles = StyleSheet.create({
   },
   header: {
     fontSize: 25,
-    marginTop: 20,
+    // marginTop: 20,
     marginBottom: 10,
   },
   innerContainer: {

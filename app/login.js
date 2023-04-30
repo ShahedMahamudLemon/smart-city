@@ -173,10 +173,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 5,
-    borderRadius: 50,
+    borderRadius: 5,
     backgroundColor: "#b7c4ed",
-    marginRight: 300,
+    elevation: 5,
     marginBottom: 50,
+    marginRight: 300,
   },
   backBtnTxt: {
     fontSize: 30,
