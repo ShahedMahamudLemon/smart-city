@@ -5,6 +5,11 @@
       "bundler": "metro"
     },
     "name": "smart-city",
-    "slug": "smart-city"
+    "slug": "smart-city",
+    "extra": {
+      "eas": {
+        "projectId": "34d33927-6232-4ba5-9199-44a3e99480d5"
+      }
+    }
   }
 }

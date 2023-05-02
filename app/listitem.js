@@ -15,7 +15,7 @@ const listitem = () => {
       >
         <Text style={styles.backBtnTxt}>←</Text>
       </TouchableOpacity>
-      <Text style={styles.header}>Important Places</Text>
+      <Text style={styles.header}>Select a Division</Text>
       {/* 1 */}
       <View style={styles.container}>
         <View style={styles.innerContainer}>
@@ -23,15 +23,17 @@ const listitem = () => {
             <Ionicons name="square" size={30} color={"gray"} />
           </View>
           <View style={styles.productInfoContainer}>
-            <Text style={styles.secondaryText}>Hotels</Text>
-            <Text>Rating 5</Text>
+            <Text style={styles.secondaryText}>Dhaka</Text>
+            <Text>Bangladesh</Text>
           </View>
         </View>
         <View>
           <TouchableOpacity
             style={styles.detailsBtn}
             onPress={() => {
-              navigation.navigate("itemdetails");
+              navigation.navigate("itemdetails", {
+                selectedDivision: "Dhaka",
+              });
             }}
           >
             <Text style={styles.primaryText}>Details</Text>
@@ -45,15 +47,41 @@ const listitem = () => {
             <Ionicons name="square" size={30} color={"gray"} />
           </View>
           <View style={styles.productInfoContainer}>
-            <Text style={styles.secondaryText}>Shopping Mall</Text>
-            <Text>Rating 5</Text>
+            <Text style={styles.secondaryText}>Sylhet</Text>
+            <Text>Bangladesh</Text>
           </View>
         </View>
         <View>
           <TouchableOpacity
             style={styles.detailsBtn}
             onPress={() => {
-              navigation.navigate("itemdetails");
+              navigation.navigate("itemdetails", {
+                selectedDivision: "Sylhet",
+              });
+            }}
+          >
+            <Text style={styles.primaryText}>Details</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+      {/* 3 */}
+      <View style={styles.container}>
+        <View style={styles.innerContainer}>
+          <View style={styles.IconContainer}>
+            <Ionicons name="square" size={30} color={"gray"} />
+          </View>
+          <View style={styles.productInfoContainer}>
+            <Text style={styles.secondaryText}>Chittagong</Text>
+            <Text>Bangladesh</Text>
+          </View>
+        </View>
+        <View>
+          <TouchableOpacity
+            style={styles.detailsBtn}
+            onPress={() => {
+              navigation.navigate("itemdetails", {
+                selectedDivision: "Chittagong",
+              });
             }}
           >
             <Text style={styles.primaryText}>Details</Text>

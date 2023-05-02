@@ -1,9 +1,38 @@
+import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, TouchableOpacity, View, Image } from "react-native";
-import React from "react";
 import { AntDesign } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
+import axios from "axios";
 const itemdetails = () => {
+  const [placeData, setPlaceData] = useState([]);
   const navigation = useNavigation();
+  const route = useRoute();
+  const { selectedDivision } = route.params;
+  const getPlaceData = async () => {
+    try {
+      await axios({
+        method: "GET",
+        url: `https://backend-smart-city.onrender.com/api/smart-city/v1/place/findby/${selectedDivision}`,
+      }).then((response) => {
+        if (response.data.status && response.data.status === "success") {
+          setPlaceData(response.data.data);
+          // alert(response.data.data[0].name);
+        }
+      });
+    } catch (error) {
+      if (
+        error.response &&
+        error.response.status >= 400 &&
+        error.response.status <= 500
+      ) {
+        setError(1);
+        setErrorMsg(error.response.data.errors[0].message);
+      }
+    }
+  };
+  useEffect(() => {
+    getPlaceData();
+  }, []);
   return (
     <View style={styles.mainContainer}>
       <TouchableOpacity
@@ -14,7 +43,42 @@ const itemdetails = () => {
       >
         <Text style={styles.backBtnTxt}>←</Text>
       </TouchableOpacity>
-      <TouchableOpacity
+      {placeData.map((arrEl) => {
+        return (
+          <TouchableOpacity
+            style={styles.container}
+            key={arrEl._id}
+            onPress={() => {
+              navigation.navigate("navigatemap", { placeDetails: arrEl });
+            }}
+          >
+            <View style={styles.imageContainer}>
+              <Image
+                source={{
+                  uri: "https://raw.githubusercontent.com/hirishu10/my-assets/main/register.png",
+                }}
+                style={styles.productImage}
+              />
+            </View>
+            <View style={styles.infoContainer}>
+              <View>
+                <Text style={styles.secondaryTextSm}>{arrEl.name}</Text>
+                <Text style={styles.primaryTextSm}>{arrEl.city}</Text>
+              </View>
+              <View>
+                <TouchableOpacity
+                  style={styles.iconContainer}
+                  // onPress={onPressSecondary}
+                >
+                  <AntDesign name="star" size={20} color="yellow" />
+                </TouchableOpacity>
+              </View>
+            </View>
+          </TouchableOpacity>
+        );
+      })}
+
+      {/* <TouchableOpacity
         style={styles.container}
         onPress={() => {
           navigation.navigate("navigatemap");
@@ -31,36 +95,7 @@ const itemdetails = () => {
         <View style={styles.infoContainer}>
           <View>
             <Text style={styles.secondaryTextSm}>Super Shopping Mall</Text>
-            <Text style={styles.primaryTextSm}>1000</Text>
-          </View>
-          <View>
-            <TouchableOpacity
-              style={styles.iconContainer}
-              // onPress={onPressSecondary}
-            >
-              <AntDesign name="star" size={20} color="yellow" />
-            </TouchableOpacity>
-          </View>
-        </View>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.container}
-        onPress={() => {
-          navigation.navigate("navigatemap");
-        }}
-      >
-        <View style={styles.imageContainer}>
-          <Image
-            source={{
-              uri: "https://raw.githubusercontent.com/hirishu10/my-assets/main/register.png",
-            }}
-            style={styles.productImage}
-          />
-        </View>
-        <View style={styles.infoContainer}>
-          <View>
-            <Text style={styles.secondaryTextSm}>Super Shopping Mall</Text>
-            <Text style={styles.primaryTextSm}>1000</Text>
+            <Text style={styles.primaryTextSm}>{selectedDivision}</Text>
           </View>
           <View>
             <TouchableOpacity style={styles.iconContainer}>
@@ -68,7 +103,7 @@ const itemdetails = () => {
             </TouchableOpacity>
           </View>
         </View>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </View>
   );
 };
