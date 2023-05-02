@@ -131,7 +131,7 @@ const login = () => {
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.loginBtn} onPress={loginFunction}>
-        <Text style={styles.loginBtnText}>LogIn</Text>
+        <Text style={styles.loginBtnText}>Login</Text>
       </TouchableOpacity>
       {error ? (
         <View>
@@ -159,14 +159,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  errorCard: {
-    width: 300,
-    height: 50,
-    backgroundColor: "#de3138",
-    justifyContent: "center",
-    paddingLeft: 15,
-    borderRadius: 40,
-  },
+  // errorCard: {
+  //   width: 300,
+  //   height: 50,
+  //   backgroundColor: "#de3138",
+  //   justifyContent: "center",
+  //   paddingLeft: 15,
+  //   borderRadius: 40,
+  // },
   backBtn: {
     width: 50,
     height: 50,
@@ -183,22 +183,22 @@ const styles = StyleSheet.create({
     fontSize: 30,
     color: "black",
   },
-  errorCardText: {
-    paddingLeft: 15,
-    color: "white",
-    fontSize: 12,
-    fontWeight: "500",
-    position: "absolute",
-  },
-  cross: {
-    width: 20,
-    height: 20,
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: -20,
-    left: 250,
-    position: "relative",
-  },
+  // errorCardText: {
+  //   paddingLeft: 15,
+  //   color: "white",
+  //   fontSize: 12,
+  //   fontWeight: "500",
+  //   position: "absolute",
+  // },
+  // cross: {
+  //   width: 20,
+  //   height: 20,
+  //   justifyContent: "center",
+  //   alignItems: "center",
+  //   marginTop: -20,
+  //   left: 250,
+  //   position: "relative",
+  // },
   loginImage: {
     marginTop: 20,
     width: 200,
@@ -251,13 +251,13 @@ const styles = StyleSheet.create({
     color: "#e65c40",
     textDecorationLine: "underline",
   },
-  myLogo: {
-    width: 100,
-    height: 70,
-    borderRadius: 40,
-    left: 150,
-    top: 10,
-    marginBottom: 10,
-  },
+  // myLogo: {
+  //   width: 100,
+  //   height: 70,
+  //   borderRadius: 40,
+  //   left: 150,
+  //   top: 10,
+  //   marginBottom: 10,
+  // },
 });
 export default login;

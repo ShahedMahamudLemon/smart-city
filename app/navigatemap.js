@@ -3,7 +3,7 @@ import MapView, { Marker } from "react-native-maps";
 import { StyleSheet, View, TouchableOpacity, Text } from "react-native";
 import * as Location from "expo-location";
 import { useNavigation } from "@react-navigation/native";
-const map = () => {
+const navigatemap = () => {
   const navigation = useNavigation();
   const [mapRegion, setMapRegion] = useState({
     latitude: 23.811056,
@@ -82,4 +82,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default map;
+export default navigatemap;

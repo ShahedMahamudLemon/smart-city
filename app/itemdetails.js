@@ -14,7 +14,12 @@ const itemdetails = () => {
       >
         <Text style={styles.backBtnTxt}>←</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.container}>
+      <TouchableOpacity
+        style={styles.container}
+        onPress={() => {
+          navigation.navigate("navigatemap");
+        }}
+      >
         <View style={styles.imageContainer}>
           <Image
             source={{
@@ -38,7 +43,12 @@ const itemdetails = () => {
           </View>
         </View>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.container}>
+      <TouchableOpacity
+        style={styles.container}
+        onPress={() => {
+          navigation.navigate("navigatemap");
+        }}
+      >
         <View style={styles.imageContainer}>
           <Image
             source={{
@@ -53,10 +63,7 @@ const itemdetails = () => {
             <Text style={styles.primaryTextSm}>1000</Text>
           </View>
           <View>
-            <TouchableOpacity
-              style={styles.iconContainer}
-              // onPress={onPressSecondary}
-            >
+            <TouchableOpacity style={styles.iconContainer}>
               <AntDesign name="star" size={20} color="yellow" />
             </TouchableOpacity>
           </View>
